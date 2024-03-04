@@ -1,0 +1,6 @@
+framework module Pods_ExampleInfinitePagingScroll_ExampleInfinitePagingScrollUITests {
+  umbrella header "Pods-ExampleInfinitePagingScroll-ExampleInfinitePagingScrollUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
