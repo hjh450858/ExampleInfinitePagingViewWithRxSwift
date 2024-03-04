@@ -48,7 +48,7 @@ class ViewController: UIViewController {
         view.addSubview(tableView)
         
         tableView.snp.makeConstraints { make in
-            make.top.equalTo(view)
+            make.top.equalTo(view.safeAreaLayoutGuide)
             make.leading.trailing.equalTo(view)
             make.bottom.equalTo(view.safeAreaLayoutGuide)
         }
@@ -74,13 +74,13 @@ class ViewController: UIViewController {
             guard let self = self else { return }
             guard let wrappingValue = result.element?.y else { return }
             
-            // TODO: - wrappigValue값이 tableView.y값보다 높으면 데이터 추가?
+            // TODO: - wrappigValue값이 tableView.y값보다 높으면 데이터 추가
             
             // 페이지 로딩 중복 방지
             if isLoading {
                 return
             }
-            
+            // 테이블뷰의 컨텐츠사이즈에서 테이블뷰의 높이를 뺀 값보다 높으면 로딩
             if wrappingValue > (self.tableView.contentSize.height - tableView.frame.size.height) {
                 print("paging")
                 // 데이터 로딩
@@ -117,6 +117,7 @@ class ViewController: UIViewController {
         guard let lastElement = self.dataSource.value.last else { return }
         print("lastElement = \(lastElement)")
         
+        // 추가될 데이터
         let newData = [lastElement + 1]
         // 데이터 추가
         self.dataSource.accept(self.dataSource.value + newData)
